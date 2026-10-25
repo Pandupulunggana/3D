@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://btfmub8m26582"]
+
+[ext_resource type="Script" uid="uid://dbo5nd4b8ik2c" path="res://Script/save_manager.gd" id="1_dlwip"]
+[ext_resource type="Script" uid="uid://dxi6wtyxskgce" path="res://Script/player.gd" id="2_ejll3"]
+[ext_resource type="PackedScene" uid="uid://nemq8soqimyw" path="res://Scene/coin.tscn" id="3_ejll3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_emx41"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_dlwip"]
+sky_material = SubResource("ProceduralSkyMaterial_emx41")
+
+[sub_resource type="Environment" id="Environment_ejll3"]
+background_mode = 2
+sky = SubResource("Sky_dlwip")
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_47dxx"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_47dxx"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dlwip"]
+points = PackedVector3Array(-0.12520654, -0.532801, -0.4805069, 0.022783129, 0.4760704, 0.49888408, 0.16971254, 0.5591441, 0.46417162, 0.23105091, -0.8035912, 0.32045516, 0.40741014, 0.651043, -0.24352328, -0.4827893, 0.59484255, 0.082213186, -0.3628679, -0.68231165, 0.2896967, 0.46904355, -0.65452886, -0.06627126, -0.12744367, 0.8427015, -0.33810276, -0.39343542, -0.6839421, -0.24471663, 0.43825462, 0.62330925, 0.20084947, 0.0841477, 0.977454, 0.11479468, -0.06820232, -0.9764576, -0.12927033, 0.20054972, -0.56312895, -0.4514544, -0.18552664, 0.59545326, -0.4534751, -0.27336287, 0.59226835, 0.40775412, -0.0069364863, -0.47682306, 0.49966025, 0.37582088, -0.5886136, 0.31695515, 0.111579016, 0.5630594, -0.48117727, -0.41725034, 0.5278656, -0.27049688, -0.48454633, -0.59697217, -0.06650971, -0.27974695, 0.90856135, 0.05333608, -0.25019687, -0.8807117, 0.20531891, 0.263647, -0.90277094, -0.1273943, 0.29336792, 0.8715263, -0.15719566, 0.3734115, -0.5263189, -0.32824618, 0.4996626, 0.47664148, -0.0068885577, 0.053105574, 0.8750009, 0.32470253, -0.15454252, -0.5908538, 0.4658794, -0.09727988, -0.7823577, -0.39818847, -0.3876489, -0.49817133, 0.31564978, -0.30067965, -0.58799505, -0.38890144)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xpn62"]
+albedo_color = Color(1, 0.1764706, 0.69803923, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ow5if"]
+albedo_color = Color(0.2784314, 0.2627451, 1, 1)
+
+[node name="world" type="Node3D" unique_id=833554078]
+script = ExtResource("1_dlwip")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=485353735]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=655566939]
+environment = SubResource("Environment_ejll3")
+
+[node name="Plat" type="CSGBox3D" parent="." unique_id=80178214]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.160486, 0.74311376, 27.092598)
+material_override = SubResource("StandardMaterial3D_47dxx")
+use_collision = true
+size = Vector3(86.53087, 0.001, 90.415665)
+
+[node name="Wall4" type="CSGBox3D" parent="." unique_id=18212793]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68.34953, 13.377274, 27.066223)
+use_collision = true
+size = Vector3(1, 27.754547, 90.151)
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1870426658]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.17618, 0)
+script = ExtResource("2_ejll3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1475436554]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23796058, 0.6857302, -0.29687452)
+mesh = SubResource("CapsuleMesh_47dxx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=356969172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23796058, 0.6857302, -0.29687452)
+shape = SubResource("ConvexPolygonShape3D_dlwip")
+
+[node name="Head" type="Node3D" parent="Player" unique_id=1338893614]
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head" unique_id=1501508435]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26837465, 1.5966477, -0.205894)
+fov = 85.93586
+
+[node name="RayCast3D" type="RayCast3D" parent="Player/Head/Camera3D" unique_id=1392281510]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26837465, -1.5966477, 0.205894)
+target_position = Vector3(0, 0, -3)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1207239414]
+
+[node name="InteractLabel" type="Label" parent="UI" unique_id=1589034592]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = 38.5
+offset_right = 0.5
+offset_bottom = 61.5
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+
+[node name="Wall3" type="CSGBox3D" parent="." unique_id=1415202405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.069744, 10.644299, -17.78694)
+use_collision = true
+size = Vector3(86.093864, 22.288597, 1)
+
+[node name="Wall2" type="CSGBox3D" parent="." unique_id=448907676]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.961533, 13.297668, 26.93245)
+use_collision = true
+size = Vector3(1, 27.595337, 89.66165)
+
+[node name="Wall" type="CSGBox3D" parent="." unique_id=2025642489]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.110168, 13.242889, 72.15941)
+use_collision = true
+size = Vector3(85.73865, 27.485779, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1635594779]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.786544, 1.2924199, 13.981331)
+use_collision = true
+size = Vector3(5.236206, 1.2202148, 5.104492)
+material = SubResource("StandardMaterial3D_xpn62")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=587229846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.669029, 2.9384503, 19.708208)
+use_collision = true
+size = Vector3(5.861328, 0.7607422, 4.1327515)
+material = SubResource("StandardMaterial3D_ow5if")
+
+[node name="Coin" parent="." unique_id=1909700176 instance=ExtResource("3_ejll3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4978244, 9.982563)

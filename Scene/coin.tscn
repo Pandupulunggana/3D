@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://nemq8soqimyw"]
+
+[ext_resource type="Script" uid="uid://dkskrh1g73xrp" path="res://Script/pickup.gd" id="1_wqyjo"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xpn62"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ejll3"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[node name="Coin" type="StaticBody3D" unique_id=1909700176]
+script = ExtResource("1_wqyjo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1787431901]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_xpn62")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=214545572]
+shape = SubResource("BoxShape3D_ejll3")
